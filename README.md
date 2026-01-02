@@ -1,26 +1,18 @@
 <p align="center">
-  <img src="https://cdn.dribbble.com/userupload/46214001/file/4a12b42c7c18b8e8fde467a3e977d601.png?resize=752x255&vertical=center" alt="Python Review Banner" width="100%">
+  <img src="https://cdn.dribbble.com/userupload/46242920/file/bdbef935da688edfd85fcfeca75754a0.png?resize=1200x675&vertical=center"
+       alt="Python by Example"
+       width="100%">
 </p>
 
-<h1 align="center">🐍 Python Review</h1>
+# Python by Example
 
-<p align="center">
-  <strong>A Comprehensive Python Tutorial from Basics to Advanced</strong>
-</p>
+A practical, example-driven Python repository designed to help you learn Python from fundamentals to advanced concepts through clear, runnable code.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python Version">
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/Status-Complete-success?style=for-the-badge" alt="Status">
-</p>
-
-<p align="center">
-  <em>Each file is self-contained with detailed explanations and executable examples.</em>
-</p>
+Each file is self-contained and focuses on a single concept, making the repository suitable for structured learning, revision, or reference.
 
 ---
 
-## � Table of Contents
+## Table of Contents
 
 - [Overview](#-overview)
 - [Topics Covered](#-topics-covered)
@@ -31,7 +23,7 @@
 
 ---
 
-## 🎯 Overview
+## Overview
 
 This repository contains a complete Python tutorial designed for both beginners and experienced developers looking to refresh their knowledge. Each topic is organized in separate folders with practical, runnable examples.
 
@@ -43,7 +35,7 @@ This repository contains a complete Python tutorial designed for both beginners 
 
 ---
 
-## �📚 Topics Covered
+## Topics Covered
 
 ### 01. Basics
 | File | Topic | Description |
@@ -120,7 +112,7 @@ This repository contains a complete Python tutorial designed for both beginners 
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Clone the repository**
    ```bash
@@ -140,7 +132,7 @@ This repository contains a complete Python tutorial designed for both beginners 
 
 ---
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 | Requirement | Version | Notes |
 |:------------|:--------|:------|
@@ -154,7 +146,7 @@ python --version
 
 ---
 
-## � File Structure
+## File Structure
 
 Each Python file follows a consistent structure:
 
@@ -188,7 +180,7 @@ Key Concepts:
 
 ---
 
-## 🗺️ Learning Path
+## Learning Path
 
 <table>
 <tr>
@@ -228,7 +220,7 @@ Key Concepts:
 </table>
 
 ```
-📌 Recommended Flow:
+ Recommended Flow:
 Beginner     →  01_basics → 02_control_flow → 03_loops
 Intermediate →  04_data_structures → 05_functions → 06_modules
 Advanced     →  07_error_handling → 08_oop → 09_advanced
@@ -237,7 +229,7 @@ Professional →  10_best_practices
 
 ---
 
-## 📊 Progress Tracker
+## Progress Tracker
 
 Use this checklist to track your learning progress:
 
@@ -255,7 +247,7 @@ Use this checklist to track your learning progress:
 ---
 
 <p align="center">
-  <strong>Happy Learning! 🐍✨</strong>
+  <strong>Happy Learning!</strong>
 </p>
 
 <p align="center">
