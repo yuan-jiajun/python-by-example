@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python By Example | Interactive Learning Docs</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="A premium, interactive documentation hub for mastering Python by example. Run code live in your browser.">
+    <meta name="keywords" content="Python, Tutorial, Learn Python, Interactive Python, Pyodide, Coding, Programming">
+    <meta name="author" content="blshaer">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pythonbyexample.github.io/">
+    <meta property="og:title" content="Python By Example | Interactive Learning Docs">
+    <meta property="og:description"
+        content="Master Python with real-world examples and an interactive browser-only playground.">
+    <meta property="og:image"
+        content="https://cdn.dribbble.com/userupload/46242920/file/bdbef935da688edfd85fcfeca75754a0.png?resize=1200x675&vertical=center">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://pythonbyexample.github.io/">
+    <meta property="twitter:title" content="Python By Example | Interactive Learning Docs">
+    <meta property="twitter:description"
+        content="Master Python with real-world examples and an interactive browser-only playground.">
+    <meta property="twitter:image"
+        content="https://cdn.dribbble.com/userupload/46242920/file/bdbef935da688edfd85fcfeca75754a0.png?resize=1200x675&vertical=center">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Monaco Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+    <!-- Pyodide Core -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+</head>
+
+<body class="readme-theme">
+    <div id="playground-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="file-info">
+                    <i class="fab fa-python"></i>
+                    <span id="lesson-title">Playground.py</span>
+                </div>
+                <div class="header-actions">
+                    <button id="edit-btn" class="btn-ghost" title="Enable editing"><i class="fas fa-edit"></i>
+                        Edit</button>
+                    <button id="reset-btn" class="btn-ghost" title="Reset to original code"><i class="fas fa-undo"></i>
+                        Reset</button>
+                    <button id="run-btn" class="btn-run" disabled><i class="fas fa-play"></i> Run Code</button>
+                    <button class="close-modal"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="playground-body">
+                <div class="editor-pane">
+                    <div id="monaco-editor-container" style="width: 100%; height: 100%;"></div>
+                </div>
+                <div class="output-pane">
+                    <div class="output-header">Terminal Output</div>
+                    <pre id="output-area">Loading Python environment... (Ready in ~10s)</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fab fa-python"></i>
+                <span>Python<span>By Example</span></span>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search documentation...">
+            </div>
+            <div class="ext-links">
+                <a href="https://github.com/blshaer/python-by-example" target="_blank" title="GitHub Repository"><i
+                        class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">Table of Contents</div>
+            <nav id="toc" class="toc-nav">
+                <!-- TOC links will be injected here -->
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line"></div>
+            </nav>
+        </aside>
+
+        <main class="content-area">
+            <header class="readme-header">
+                <h1>Python Mastery <span class="version">v1.0.0</span></h1>
+
+                <p class="lead">Complete roadmap for mastering Python, structured for clarity and professional growth.
+                </p>
+            </header>
+
+            <section id="documentation-content">
+                <!-- Documentation modules will be injected here -->
+                <div class="skeleton-section"></div>
+                <div class="skeleton-section"></div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="docs-footer">
+        <div class="footer-inner">
+            <p>Made with ❤️ for the Python Community.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
