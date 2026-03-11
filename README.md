@@ -10,9 +10,6 @@ A practical, example-driven Python repository designed to help you learn Python 
 
 Each file is self-contained and focuses on a single concept, making the repository suitable for structured learning, revision, or reference.
 
-### 🌐 **Visit the Interactive Website**
-Want to follow your progress? Visit the website at [pythonbyexample.page.gd](https://pythonbyexample.page.gd/)
-
 > **If you like this project, please hit the ⭐ Star button and follow me on GitHub [@blshaer](https://github.com/blshaer)!**
 
 ---
@@ -25,6 +22,7 @@ Want to follow your progress? Visit the website at [pythonbyexample.page.gd](htt
 - [Prerequisites](#-prerequisites)
 - [File Structure](#-file-structure)
 - [Learning Path](#-learning-path)
+- [Projects](#-projects)
 
 ---
 
@@ -119,21 +117,50 @@ This repository contains a complete Python tutorial designed for both beginners 
 
 ## Getting Started
 
+Follow these steps to clone the repository and set it up in your local editor:
+
 1. **Clone the repository**
+   Open your terminal and run:
    ```bash
-   git clone https://github.com/blshaer/python_review.git
-   cd python_review
+   git clone https://github.com/blshaer/python-by-example.git
+   cd python-by-example
    ```
 
-2. **Start from basics**
+2. **Set up a Virtual Environment (Recommended)**
+   It's best practice to keep your projects isolated. Run these commands:
+   ```bash
+   python -m venv venv
+   # On Windows:
+   .\venv\Scripts\activate
+   # On macOS/Linux:
+   source venv/bin/activate
+   ```
+
+3. **Install Dependencies**
+   Install the necessary tools for testing and formatting:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Open in your code editor**
+   We recommend [Visual Studio Code](https://code.visualstudio.com/). Open the project directly:
+   ```bash
+   code .
+   ```
+
+5. **Explore and Run**
+   Navigate to any example, like `01_basics`, and run the file:
    ```bash
    cd 01_basics
    python 01_print.py
    ```
 
-3. **Read the comments** — Each section is thoroughly explained
+6. **Read the comments** — Detailed explanations are provided inline for every concept!
 
-4. **Experiment** — Modify the code and observe the results
+7. **Try the Tests** — Go to the new testing module to see how professional code is verified:
+   ```bash
+   pytest 11_testing/01_test_basics.py
+   ```
 
 ---
 
@@ -219,6 +246,7 @@ Key Concepts:
 <td>
 
 10. [Best Practices](./10_best_practices/)
+11. [Testing](./11_testing/)
 
 </td>
 </tr>
@@ -229,8 +257,23 @@ Key Concepts:
 Beginner     →  01_basics → 02_control_flow → 03_loops
 Intermediate →  04_data_structures → 05_functions → 06_modules
 Advanced     →  07_error_handling → 08_oop → 09_advanced
-Professional →  10_best_practices
+Professional →  10_best_practices → 11_testing
 ```
+
+---
+
+## Projects
+
+Put your skills to the test! Each project includes a **challenge description** (`README.md`) so you can try building it yourself before looking at the solution.
+
+| # | Project | Difficulty | Concepts Applied |
+|:--|:--------|:-----------|:-----------------|
+| 01 | [**Number Guessing Game**](./projects/01_number_guessing_game/) | 🟢 Beginner | Loops, Conditionals, Random module |
+| 02 | [**Expense Tracker**](./projects/02_expense_tracker/) | 🟡 Intermediate | Dicts, File I/O (JSON), Functions |
+| 03 | [**Library Management System**](./projects/03_library_management/) | 🟠 Advanced | OOP, Inheritance, Custom Exceptions |
+| 04 | [**Real-time Weather CLI**](./projects/04_weather_cli/) | 🚀 Professional | API Requests, Decorators, Type Hints |
+
+> 💡 **Tip:** Read the project `README.md` first and try to build it on your own before looking at `solution.py`!
 
 ---
 
@@ -248,6 +291,13 @@ Use this checklist to track your learning progress:
 - [ ] **08. OOP** — Classes, Init, Inheritance, Polymorphism
 - [ ] **09. Advanced Python** — Comprehensions, Generators, Decorators
 - [ ] **10. Best Practices** — PEP8, Type Hints, Virtual Environments
+- [ ] **11. Testing** — Unit Tests, Pytest, Assertions
+
+### 🏗️ Projects
+- [ ] **Project 01** — Number Guessing Game (Beginner)
+- [ ] **Project 02** — Expense Tracker (Intermediate)
+- [ ] **Project 03** — Library Management System (Advanced)
+- [ ] **Project 04** — Real-time Weather CLI (Professional)
 
 ---
 
