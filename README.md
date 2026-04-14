@@ -10,8 +10,6 @@ A practical, example-driven Python repository designed to help you learn Python 
 
 Each file is self-contained and focuses on a single concept, making the repository suitable for structured learning, revision, or reference.
 
-> **If you like this project, please hit the ⭐ Star button and follow me on GitHub [@blshaer](https://github.com/blshaer)!**
-
 ---
 
 ## Table of Contents
