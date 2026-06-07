@@ -17,6 +17,22 @@ Key Concepts:
 ================================================================================
 """
 
+# ============================================================================
+# 【中文导读】注释与文档字符串（docstring）
+# ----------------------------------------------------------------------------
+# Python 只有一种“真注释”：以 # 开头，到行尾结束，解释器完全忽略。
+# 它没有 C/Java 那种 /* ... */ 块注释。所谓“多行注释”有两种做法：
+#   ① 多写几行 #（推荐，真注释）
+#   ② 三引号字符串 """...""" —— 但这其实是“字符串字面量”不是注释！
+#      它会被求值成一个 str 对象（只是没赋值给变量就被丢弃），并非被忽略。
+#
+# 学这个文件你要拿下的难点：
+#   1. # 注释  vs  """字符串字面量"" 的本质区别（一个被忽略，一个被求值）
+#   2. docstring：函数/类/模块的第一条字符串，可用 __doc__ 读取
+#   3. 好注释解释“为什么(Why)”，而不是复述代码“做了什么(What)”
+#   4. TODO/FIXME/NOTE/HACK 等约定标记，便于团队与 IDE 检索
+# ============================================================================
+
 # -----------------------------------------------------------------------------
 # 1. Single-Line Comments
 # -----------------------------------------------------------------------------
@@ -54,6 +70,12 @@ print("\n--- Multi-Line Comments ---")
 
 # Approach 2: Triple-quoted strings (not recommended for comments)
 # These are actually string literals, not true comments
+# 中文：下面这段三引号文本看着像注释，实则是一个 str 对象。它会被解释器“创建”
+#       出来，只是没被引用而随即丢弃。和真注释 # 的区别在于：
+#       - 真注释 # 在编译阶段就被剥离，运行期完全不存在；
+#       - 字符串字面量是真实对象，放错位置（如循环体内）会带来无谓开销。
+# ⚠️ 坑：别拿三引号当普通多行注释用。它只有作为函数/类/模块“第一条语句”时
+#        才有特殊身份（docstring），其它位置只是个被浪费的字符串。
 """
 This looks like a multi-line comment, but it's actually
 a string literal. If not assigned to a variable,
@@ -71,6 +93,9 @@ print("Multi-line comments explained above!")
 print("\n--- Docstrings ---")
 
 
+# 中文：docstring 必须是函数体的“第一条语句”（紧跟 def 那行之后），
+#       才会被绑定到 greet.__doc__，也是 help(greet) 显示的内容。
+#       推荐遵循 Google / NumPy 风格写 Args / Returns / Raises / Examples 段落。
 def greet(name):
     """
     Greet a person by their name.
@@ -93,6 +118,8 @@ def greet(name):
 
 # Access the docstring
 print(greet("Baraa"))
+# 中文：__doc__ 就是那段 docstring 字符串；[:50] 取前 50 个字符做截断展示。
+# ⚠️ 坑：若函数没写 docstring，__doc__ 是 None，对 None 做切片会抛 TypeError。
 print(f"Function docstring: {greet.__doc__[:50]}...")
 
 
@@ -171,11 +198,14 @@ print(f"Rectangle perimeter: {rect.perimeter()}")
 print("\n--- Comment Best Practices ---")
 
 # ✅ GOOD: Explain WHY, not WHAT
+# 中文：好注释回答“为什么这样做”（业务规则、性能权衡、坑的来由），
+#       代码本身已经说清“做了什么”，无须再用注释复述。
 # Calculate discount for loyalty members (15% off for 2+ years)
 years_as_member = 3
-discount = 0.15 if years_as_member >= 2 else 0
+discount = 0.15 if years_as_member >= 2 else 0  # 中文：三元表达式 A if 条件 else B
 
 # ❌ BAD: Explains what the code obviously does
+# 中文：下面这种把显而易见的代码再翻译一遍的注释是噪音，应删除。
 # x = x + 1  # Add 1 to x
 
 # ✅ GOOD: Document complex algorithms
@@ -240,6 +270,10 @@ print(__doc__[:100] + "...")
 print("\n--- Type Hints with Comments ---")
 
 
+# 中文：参数后的 : list / : float 是“类型提示(type hint)”，-> list 是返回值类型。
+#       它们只是给人和工具（IDE、mypy）看的“建议”，运行时不会强制检查类型。
+# ⚠️ 坑：可变类型（如 list、dict）别用作默认值（def f(x=[])），默认值只创建一次、
+#        会在多次调用间共享，导致状态污染。需要时用 None 占位再在函数体里新建。
 def process_data(
     data: list,      # The input data to process
     threshold: float = 0.5,  # Minimum value to include (default: 0.5)
@@ -341,3 +375,15 @@ print("""
 6. Use TODO, FIXME, NOTE for special markers
 7. Don't over-comment obvious code
 """)
+
+# ============================================================================
+# 【避坑总结 · 02_comments.py】
+# ----------------------------------------------------------------------------
+# 1. Python 没有 /* */ 块注释；多行注释用多行 #，不要滥用三引号。
+# 2. 三引号是“字符串字面量”不是注释：会被求值成对象，放错位置纯属浪费。
+# 3. docstring 必须是函数/类/模块的第一条语句，才能进 __doc__、被 help() 读到。
+# 4. 没写 docstring 时 __doc__ 为 None，对它切片/拼接会 TypeError。
+# 5. 注释要解释 Why 不是 What；复述显而易见代码的注释是噪音。
+# 6. 类型提示(: type、-> type)运行期不强制，只供工具检查。
+# 7. 函数默认值别用可变对象（[]/{}），只创建一次会跨调用共享——用 None 占位。
+# ============================================================================
