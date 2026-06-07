@@ -243,9 +243,9 @@ print("\n--- Type Hints with Comments ---")
 # ⚠️ 坑：可变类型（如 list、dict）别用作默认值（def f(x=[])）！默认值只在定义时
 #        创建一次，会在多次调用间共享，导致状态污染。需要时用 None 占位再在体内新建。
 def process_data(
-    data: list,              # 待处理的输入数据
-    threshold: float = 0.5,  # 纳入结果的最小阈值（默认 0.5）
-    verbose: bool = False    # 为 True 时打印进度
+        data: list,  # 待处理的输入数据
+        threshold: float = 0.5,  # 纳入结果的最小阈值（默认 0.5）
+        verbose: bool = False  # 为 True 时打印进度
 ) -> list:
     """处理一组数值，返回所有大于 threshold 的元素。"""
     if verbose:
@@ -254,7 +254,10 @@ def process_data(
 
 
 result = process_data([0.1, 0.6, 0.3, 0.8, 0.4], threshold=0.5)
-print(f"Filtered data: {result}")
+print(f"Filtered data: {result}\n")
+
+result = process_data([0.1, 0.6, 0.3, 0.8, 0.4], threshold=0.5, verbose=True)
+print(f"Filtered2 data: {result}")
 
 # -----------------------------------------------------------------------------
 # 9. 实战示例：注释得当的代码
@@ -278,14 +281,14 @@ def calculate_shipping_cost(weight, distance, express=False):
         float: 运费（美元）。
 
     示例:
-        >>> calculate_shipping_cost(2.5, 100)
+        # >>> calculate_shipping_cost(2.5, 100)
         17.0
     """
     # 这几个全大写名字是“常量”约定（Python 没有真正的 final 常量）
     # Java 对比：相当于 final 字段，但 Python 不强制，靠命名约定提醒别改。
-    BASE_RATE = 5.00       # 基础费
-    WEIGHT_RATE = 2.00     # 每千克费率
-    DISTANCE_RATE = 0.05   # 每千米费率
+    BASE_RATE = 5.00  # 基础费
+    WEIGHT_RATE = 2.00  # 每千克费率
+    DISTANCE_RATE = 0.05  # 每千米费率
 
     # 分别算出各部分费用再求和
     weight_cost = weight * WEIGHT_RATE
@@ -298,8 +301,8 @@ def calculate_shipping_cost(weight, distance, express=False):
     return round(total, 2)
 
 
-package_weight = 3.5      # 千克
-shipping_distance = 250   # 千米
+package_weight = 3.5  # 千克
+shipping_distance = 250  # 千米
 
 standard_cost = calculate_shipping_cost(package_weight, shipping_distance)
 express_cost = calculate_shipping_cost(package_weight, shipping_distance, express=True)
