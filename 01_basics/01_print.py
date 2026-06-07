@@ -1,20 +1,22 @@
 """
 ================================================================================
-File: 01_print.py
-Topic: The print() Function in Python
+文件：01_print.py
+主题：Python 的 print() 输出函数
 ================================================================================
 
-This file demonstrates the print() function, which is used to display output
-to the console. It's one of the most fundamental functions in Python and
-essential for debugging and displaying information.
+本文件演示 print() 函数——把内容输出到控制台。它是 Python 最基础的函数之一，
+调试和展示信息时几乎离不开它。
 
-Key Concepts:
-- Basic printing
-- Multiple arguments
-- Separators and end characters
-- Formatted strings (f-strings)
-- Escape characters
+核心知识点：
+- 基本打印
+- 一次打印多个值
+- 分隔符 sep 与结尾符 end
+- 格式化字符串（f-string）
+- 转义字符
 
+Java 对比：print 之于 Python，约等于 System.out.print / println 之于 Java，
+但更灵活——一个函数既能 print() 又能 println()（靠 end 参数控制），
+还能一次塞任意多个、任意类型的参数，且无需事先 toString()。
 ================================================================================
 """
 
@@ -29,6 +31,12 @@ Key Concepts:
 #   - file：输出到哪里，默认标准输出；可改成文件对象
 #   - flush：是否立即刷新缓冲区（做进度条/实时输出时常用 flush=True）
 #
+# Java 对比：
+#   - Java 要 System.out.println("x=" + x)，靠 + 拼接，且非字符串要先转换；
+#     Python 直接 print("x =", x)，逗号分隔、自动转字符串、自动加空格。
+#   - Java 的 println 固定换行、print 固定不换行；Python 用同一个函数 + end 参数。
+#   - sep / end / flush 这种「关键字参数」Java 没有对应概念，靠方法重载近似。
+#
 # 学这个文件你要拿下的难点：
 #   1. sep / end 两个关键字参数怎么改变输出形态
 #   2. f-string 的格式说明符：对齐 <^>、保留小数 :.2f、千分位 :,、填充字符
@@ -37,69 +45,76 @@ Key Concepts:
 # ============================================================================
 
 # -----------------------------------------------------------------------------
-# 1. Simple Output
+# 1. 基本输出
 # -----------------------------------------------------------------------------
-# The most basic use of print()
+# print() 最基础的用法
 
-print("--- Simple Output ---")
+print("--- 基本输出 ---")
 
 print("Hello, World!")
 print("Welcome to Python!")
 print("Learning is fun!")
 
 # -----------------------------------------------------------------------------
-# 2. Printing Different Data Types
+# 2. 打印不同的数据类型
 # -----------------------------------------------------------------------------
-# print() can output any data type
+# print() 可以输出任意类型
 
-print("\n--- Different Data Types ---")
+print("\n--- 不同数据类型 ---")
 
-# 中文：print 会自动对任意对象调用 str()（更准确说是先尝试对象的 __str__），
-#       所以不需要像 C/Java 那样区分 %d %s 等格式占位符就能直接打印任意类型。
-print(42)              # Integer
-print(3.14159)         # Float
-print(True)            # Boolean
-print(None)            # NoneType（注意：打印出来是 None，不是空字符串）
-print([1, 2, 3])       # List
-print({"a": 1})        # Dictionary
+# print 会自动对任意对象调用 str()（更准确说是先尝试对象的 __str__），
+# 所以不需要像 Java 那样手动 toString() 或字符串拼接就能直接打印任意类型。
+# Java 对比：System.out.println(obj) 也会自动调 obj.toString()，思路一致；
+#            但 Java 没法像 print(42) 这样不写引号还能区分类型——Python 靠动态类型。
+print(42)              # 整数 int
+print(3.14159)         # 浮点 float
+print(True)            # 布尔 bool
+print(None)            # 空值 NoneType（打印出来是 None，不是空字符串；Java 的 null 打印成 "null"）
+print([1, 2, 3])       # 列表 list
+print({"a": 1})        # 字典 dict
 
 # -----------------------------------------------------------------------------
-# 3. Printing Multiple Items
+# 3. 一次打印多个值
 # -----------------------------------------------------------------------------
-# Pass multiple arguments separated by commas
+# 用逗号分隔多个参数即可
 
-print("\n--- Multiple Items ---")
+print("\n--- 多个值 ---")
 
+# Java 对比：Java 要写 "Name: " + name + " | Age: " + age 一路 + 拼；
+#            Python 用逗号分隔，省去拼接，且默认自动用空格隔开。
 print("Hello", "World")
 print("Python", "is", "awesome")
 print("Name:", "Baraa", "| Age:", 25)
 print(1, 2, 3, 4, 5)
 
 # -----------------------------------------------------------------------------
-# 4. The sep Parameter
+# 4. sep 分隔符参数
 # -----------------------------------------------------------------------------
-# sep defines what goes between multiple items (default is space)
+# sep 定义多个值之间的分隔符（默认是一个空格）
 
-print("\n--- Separator Parameter ---")
+print("\n--- 分隔符 sep ---")
 
-# 中文：sep 只作用在“多个参数之间”，不会加在开头或结尾。
-#       常用来一行拼出日期、IP、CSV 等结构化文本，省去手动拼字符串。
+# sep 只作用在“多个参数之间”，不会加在开头或结尾。
+# 常用来一行拼出日期、IP、CSV 等结构化文本，省去手动拼字符串。
+# Java 对比：类似 String.join(分隔符, 元素...)，但 print 直接内建在输出里更省事。
 print("Python", "Java", "C++", sep=", ")
-print("2025", "01", "15", sep="-")      # Date format
-print("192", "168", "1", "1", sep=".")   # IP address
+print("2025", "01", "15", sep="-")       # 日期格式
+print("192", "168", "1", "1", sep=".")   # IP 地址
 print("apple", "banana", "cherry", sep=" | ")
-print("a", "b", "c", sep="")             # No separator
+print("a", "b", "c", sep="")             # 空分隔符 = 直接相连
 
 # -----------------------------------------------------------------------------
-# 5. The end Parameter
+# 5. end 结尾符参数
 # -----------------------------------------------------------------------------
-# end defines what goes at the end (default is newline \n)
+# end 定义打印结束后追加的内容（默认是换行符 \n）
 
-print("\n--- End Parameter ---")
+print("\n--- 结尾符 end ---")
 
-# 中文：end 替换默认的换行符。end="" 表示“打印完不换行”，
-#       于是下一个 print 会接着同一行输出——这是做进度条/同行刷新的基础。
-# ⚠️ 坑：end="" 时输出会停在缓冲区里可能不立即显示，做实时进度时加 flush=True：
+# end 替换默认的换行符。end="" 表示“打印完不换行”，
+# 于是下一个 print 会接着同一行输出——这是做进度条/同行刷新的基础。
+# Java 对比：print()（不换行）与 println()（换行）的区别，在 Python 里统一成
+#            一个函数 + end 参数：print(x, end="") ≈ System.out.print(x)。
+# ⚠️ 坑：end="" 时输出可能停在缓冲区里不立即显示，做实时进度时加 flush=True：
 #        print("█", end="", flush=True)
 print("Loading", end="")
 print("...", end="")
@@ -108,18 +123,18 @@ print(" Done!")
 print("First line", end=" --> ")
 print("Second line")
 
-# Creating a progress bar effect
+# 进度条效果
 print("\nProgress: ", end="")
 for i in range(5):
     print("█", end="")
 print(" Complete!")
 
 # -----------------------------------------------------------------------------
-# 6. Variables in Print
+# 6. 在 print 中使用变量
 # -----------------------------------------------------------------------------
-# Print variable values
+# 打印变量的值
 
-print("\n--- Variables ---")
+print("\n--- 变量 ---")
 
 name = "Baraa"
 age = 25
@@ -131,99 +146,109 @@ print("Age:", age)
 print("City:", city)
 print("Student:", is_student)
 
-# Print with variable calculations
+# 打印时直接做运算（{} 内/参数里都可放表达式）
 x = 10
 y = 5
 print("Sum:", x + y)
 print("Product:", x * y)
 
 # -----------------------------------------------------------------------------
-# 7. String Formatting - f-strings (Recommended)
+# 7. 字符串格式化 —— f-string（推荐）
 # -----------------------------------------------------------------------------
-# Modern way to embed variables in strings (Python 3.6+)
+# 把变量嵌入字符串的现代写法（Python 3.6+）
 
-print("\n--- f-strings (Formatted String Literals) ---")
+print("\n--- f-string（格式化字符串字面量）---")
 
 name = "Baraa"
 age = 25
 height = 1.75
 
-# 中文：f-string（Python 3.6+）在字符串前加 f，{} 里可直接写变量甚至表达式，
-#       运行时求值后嵌入。它比 + 拼接和 .format() 都更短、更快、更易读，是首选。
+# f-string（Python 3.6+）在字符串前加 f，{} 里可直接写变量甚至表达式，
+# 运行时求值后嵌入。它比 + 拼接和 .format() 都更短、更快、更易读，是首选。
+# Java 对比：最接近 Java 15 的文本块/String.format，但 f-string 更强——
+#            {} 里能直接写表达式（如 {age + 1}），不必像 String.format 那样占位 + 传参。
 # ⚠️ 坑：忘记写前缀 f，{name} 会被原样打印成 "{name}" 而不会替换。
 print(f"My name is {name}")
 print(f"I am {age} years old")
-print(f"Next year I'll be {age + 1}")  # 中文：{} 内可放表达式，这里直接算 age+1
+print(f"Next year I'll be {age + 1}")  # {} 内可放表达式，这里直接算 age+1
 
-# Formatting numbers
-# 中文：冒号后是“格式说明符”。.2f = 定点小数保留 2 位（会四舍五入，且补零）。
-#       注意 :.2f 只影响“显示”，不改变变量本身的值。
+# 数字格式化
+# 冒号后是“格式说明符”。.2f = 定点小数保留 2 位（会四舍五入，且补零）。
+# 注意 :.2f 只影响“显示”，不改变变量本身的值。
+# Java 对比：等价于 String.format("%.2f", pi)，把 % 风格换成了 {:...} 风格。
 pi = 3.14159265359
 print(f"Pi to 2 decimals: {pi:.2f}")
 print(f"Pi to 4 decimals: {pi:.4f}")
 
-# Padding and alignment
-# 中文：对齐三剑客——<左对齐、^居中、>右对齐，后面的数字是“总宽度”。
-#       宽度不足用空格补齐，常用于打印对齐的表格。
+# 填充与对齐
+# 对齐三剑客——< 左对齐、^ 居中、> 右对齐，后面的数字是“总宽度”。
+# 宽度不足用空格补齐，常用于打印对齐的表格。
+# Java 对比：类似 %-10s（左对齐）/ %10s（右对齐），但 Java 没有内建“居中”说明符。
 print(f"{'Left':<10}|{'Center':^10}|{'Right':>10}")
 print(f"{1:<10}|{2:^10}|{3:>10}")
 
-# Currency formatting
-# 中文：逗号 , 是千分位分隔符；和 .2f 组合写成 :,.2f，即“千分位 + 两位小数”。
+# 货币/千分位格式化
+# 逗号 , 是千分位分隔符；和 .2f 组合写成 :,.2f，即“千分位 + 两位小数”。
 price = 1234.567
 print(f"Price: ${price:,.2f}")  # → $1,234.57
 
 # -----------------------------------------------------------------------------
-# 8. String Formatting - Other Methods
+# 8. 字符串格式化 —— 其它方式
 # -----------------------------------------------------------------------------
-# Alternative formatting methods
+# 备选的格式化方法
 
-print("\n--- Other Formatting Methods ---")
+print("\n--- 其它格式化方法 ---")
 
-# .format() method
-# 中文：f-string 出现前的主流写法。{} 按位置填、{0}{1} 按索引填、{n} 按名字填。
-#       现在多用于“模板字符串先定义、稍后再 .format() 填值”的场景。
+# .format() 方法
+# f-string 出现前的主流写法。{} 按位置填、{0}{1} 按索引填、{n} 按名字填。
+# 现在多用于“模板字符串先定义、稍后再 .format() 填值”的场景。
+# Java 对比：用法神似 MessageFormat.format("{0} ... {1}", a, b)。
 name = "Alice"
 age = 30
 print("Hello, {}! You are {} years old.".format(name, age))
 print("Hello, {0}! You are {1} years old.".format(name, age))
 print("Hello, {n}! You are {a} years old.".format(n=name, a=age))
 
-# % operator (older style)
-# 中文：最老的 C 风格格式化，%s 转字符串、%d 转整数。
-# ⚠️ 坑：% 后若只有一个值且它是元组，会被误当成多个参数，易报错；新代码别再用它。
+# % 运算符（最老的 C 风格）
+# %s 转字符串、%d 转整数。
+# Java 对比：和 Java 的 String.format("%s ... %d", ...) / printf 同源，都源自 C。
+# ⚠️ 坑：% 后若只有一个值且它恰好是元组，会被误当成多个参数，易报错；
+#        且字符串里想原样输出百分号必须写成 %%。新代码统一用 f-string。
 print("Hello, %s! You are %d years old." % (name, age))
 
 # -----------------------------------------------------------------------------
-# 9. Escape Characters
+# 9. 转义字符
 # -----------------------------------------------------------------------------
-# Special characters using backslash \
+# 用反斜杠 \ 表示特殊字符
 
-print("\n--- Escape Characters ---")
+print("\n--- 转义字符 ---")
 
-# 中文：反斜杠 \ 是转义引导符，把后面的字符变成特殊含义（换行/制表/引号等）。
-print("Line 1\nLine 2\nLine 3")           # \n = newline
-print("Column1\tColumn2\tColumn3")         # \t = tab
-print("She said: \"Hello!\"")              # \" = quote（也可改用单引号包裹来免转义）
-print('It\'s a beautiful day')             # \' = apostrophe
+# 反斜杠 \ 是转义引导符，把后面的字符变成特殊含义（换行/制表/引号等）。
+# Java 对比：转义规则与 Java 字符串完全一致（\n \t \" \\）。
+print("Line 1\nLine 2\nLine 3")            # \n = 换行
+print("Column1\tColumn2\tColumn3")         # \t = 制表符
+print("She said: \"Hello!\"")              # \" = 双引号（也可改用单引号包裹来免转义）
+print('It\'s a beautiful day')             # \' = 单引号
 print("Path: C:\\Users\\Documents")        # \\ = 一个反斜杠（要打印 \ 必须写成 \\）
-print("Bell sound: \a")                    # \a = bell (may not work)
+print("Bell sound: \a")                    # \a = 响铃（终端可能无效果）
 
-# Raw strings - ignore escape characters
-# 中文：r"..." 原始字符串，里面的 \ 不再转义，原样保留。
-#       写 Windows 路径、正则表达式时极常用，免去满屏 \\。
+# 原始字符串 —— 关闭转义
+# r"..." 原始字符串，里面的 \ 不再转义，原样保留。
+# 写 Windows 路径、正则表达式时极常用，免去满屏 \\。
+# Java 对比：Java 没有 raw 字符串前缀，正则里只能写 "\\d"；Python 写 r"\d" 即可，更清爽。
 # ⚠️ 坑：raw 字符串不能以单个反斜杠结尾（如 r"C:\" 会语法错误）。
 print("\nRaw string:")
-print(r"C:\Users\Baraa\Desktop")           # r prefix for raw string
+print(r"C:\Users\Baraa\Desktop")           # r 前缀 = 原始字符串
 
 # -----------------------------------------------------------------------------
-# 10. Multi-line Printing
+# 10. 多行打印
 # -----------------------------------------------------------------------------
 
-print("\n--- Multi-line Strings ---")
+print("\n--- 多行字符串 ---")
 
-# Using triple quotes
-# 中文：三引号 """...""" 可跨行书写字符串，原样保留其中的换行和缩进。
+# 使用三引号
+# 三引号 """...""" 可跨行书写字符串，原样保留其中的换行和缩进。
+# Java 对比：相当于 Java 15+ 的文本块（\"\"\" ... \"\"\"），但 Python 早就有，且不做缩进剥离。
 # ⚠️ 坑：这里第一行紧跟 """ 后直接换行，所以 message 开头会带一个空行；
 #        若不想要前导/尾随空行，可在赋值后 .strip() 或把文字紧贴三引号写。
 message = """
@@ -233,7 +258,7 @@ Very useful for long text!
 """
 print(message)
 
-# ASCII art example
+# ASCII 字符画示例
 print("""
   ╔═══════════════════════════╗
   ║   Welcome to Python!      ║
@@ -242,25 +267,26 @@ print("""
 """)
 
 # -----------------------------------------------------------------------------
-# 11. Practical Examples
+# 11. 实战示例
 # -----------------------------------------------------------------------------
 
-print("--- Practical Examples ---")
+print("--- 实战示例 ---")
 
-# Receipt example
+# 小票示例
 print("\n========== RECEIPT ==========")
 item1, price1 = "Coffee", 4.99
 item2, price2 = "Sandwich", 8.50
 item3, price3 = "Cookie", 2.25
 total = price1 + price2 + price3
 
+# {item1:.<20} 表示：左对齐、总宽 20、不足部分用 '.' 填充（填充字符写在对齐符之前）
 print(f"{item1:.<20}${price1:.2f}")
 print(f"{item2:.<20}${price2:.2f}")
 print(f"{item3:.<20}${price3:.2f}")
-print("=" * 30)
+print("=" * 30)  # 字符串 * 整数 = 重复 N 次；Java 要 "=".repeat(30)
 print(f"{'TOTAL':.<20}${total:.2f}")
 
-# Table example
+# 表格示例
 print("\n| Name     | Age | City       |")
 print("|----------|-----|------------|")
 print(f"| {'Alice':<8} | {25:<3} | {'New York':<10} |")
@@ -275,5 +301,11 @@ print(f"| {'Charlie':<8} | {35:<3} | {'Tokyo':<10} |")
 # 3. sep 只插在参数之间；end 替换行尾换行符，end="" 时实时输出记得 flush=True。
 # 4. 要打印一个反斜杠得写 "\\"；raw 字符串 r"..." 免转义但不能以单个 \ 结尾。
 # 5. 三引号字符串会原样保留首尾换行/缩进，注意多出来的空行。
-# 6. 旧式 % 格式化对单个元组值容易踩坑；新代码统一用 f-string。
+# 6. 旧式 % 格式化：单个元组值易踩坑、字面百分号要写 %%；新代码统一用 f-string。
+#
+# Java 老手专属提醒：
+#   A. 打印多值用逗号别用 +：print(a, b) 而不是 print(a + b)（后者会做加法/拼接）。
+#   B. println vs print 的区别在 Python 里靠 end 参数，不是两个函数。
+#   C. 字符串能用 * 重复、用逗号让 print 自动加空格，这些 Java 都没有，别用 + 硬拼。
+#   D. f-string ≈ 文本块 + String.format 的合体，且 {} 内可直接写表达式，优先用它。
 # ============================================================================
